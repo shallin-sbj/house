@@ -107,28 +107,28 @@
                    <#list recomHouses as house>
                     <div class="col-md-3 col-sm-6">
                         <div class="property">
-                            <a href="/house/detail?id=${house.id}">
+                            <#--<a href="/house/detail?id=${house.id}">-->
                                 <div class="property-image">
-                                    <img alt="" src="${(house.firstImg)!}" style="width: 262px;height: 196px">
+                                    <#--<img alt="" src="${(house.firstImg)!}" style="width: 262px;height: 196px">-->
                                 </div>
                                 <div class="overlay">
                                     <div class="info">
-                                        <div class="tag price">￥ ${house.price} 万元</div>
-                                        <h3>${house.name}</h3>
-                                        <figure>${house.address}</figure>
+                                        <#--<div class="tag price">￥ ${house.price} 万元</div>-->
+                                        <#--<h3>${house.name}</h3>-->
+                                        <#--<figure>${house.address}</figure>-->
                                     </div>
                                     <ul class="additional-info">
                                         <li>
                                             <header>面积:</header>
-                                            <figure>${house.area}m<sup>2</sup></figure>
+                                            <#--<figure>${house.area}m<sup>2</sup></figure>-->
                                         </li>
                                         <li>
                                             <header>床:</header>
-                                            <figure>${house.beds}</figure>
+                                            <#--<figure>${house.beds}</figure>-->
                                         </li>
                                         <li>
                                             <header>卫生间:</header>
-                                            <figure>${house.baths}</figure>
+                                            <#--<figure>${house.baths}</figure>-->
                                         </li>
                                         <li>
                                             <header>车库:</header>

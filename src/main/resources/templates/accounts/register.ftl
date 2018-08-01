@@ -36,7 +36,7 @@
                                 <input type="radio" value="2" id="account-type-agent" name="type" required>经纪人
                             </label>
                         </div>
-                         <#--<div id="agency" class="disabled">
+                         <div id="agency" class="disabled">
                             <div class="form-group">
                                 <label for="account-agency">选择经纪机构:</label>
                                 <select name="agencyId" id="agencyId">
@@ -45,8 +45,8 @@
                                         <option value="${agency.id}" >${agency.name}</option>
                                      </#list>
                                 </select>
-                            </div><!-- /.form-group &ndash;&gt;
-                        </div>-->
+                            </div><!-- /.form-group -->
+                        </div>
                         <hr>
                         <div class="form-group">
                             <label for="form-create-account-full-name">全名:</label>
