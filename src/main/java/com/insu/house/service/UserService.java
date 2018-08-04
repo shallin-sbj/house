@@ -37,17 +37,25 @@ public interface UserService {
     List<User> getUserByQuery(User query);
 
     /**
-     * 重置密码
-     * @param username
+     * 发送重置密码邮件
+     * @param email
      */
-    void resetNotify(String username);
+    void resetNotify(String email);
 
     /**
-     * 重置邮箱
+     * 根据Key获取email
      * @param key
      * @return
      */
     String getResetEmail(String key);
 
+    /**
+     * 重置密码操作
+     * @param key
+     * @param passwd
+     * @return
+     */
     User reset(String key, String passwd);
+
+    User getUserById(Long userId);
 }

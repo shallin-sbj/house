@@ -12,6 +12,7 @@ public class HttpClientProperties {
 	private String agent = "agent";
 	private Integer maxConnPerRoute = 10;
 	private Integer maxConnTotaol   = 50;
+
 	public Integer getConnectTimeOut() {
 		return connectTimeOut;
 	}

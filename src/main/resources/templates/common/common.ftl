@@ -113,20 +113,22 @@
 <#macro hot>
 <aside id="featured-properties">
     <header><h3>热门房产</h3></header>
-    <#list recomHouses as house>
-    <div class="property small">
-        <a href="/house/detail?id=${house.id}">
-            <div class="property-image">
-                <img alt="" src="${(house.firstImg)!}" style="width: 100px;height: 75px">
+    <#if recomHouses??>
+        <#list recomHouses as house>
+        <div class="property small">
+            <a href="/house/detail?id=${(house.id)!}">
+                <div class="property-image">
+                    <img alt="" src="${(house.firstImg)!}" style="width: 100px;height: 75px">
+                </div>
+            </a>
+            <div class="info">
+                <a href="/house/detail?id=${house.id}"><h4>${(house.name)!}</h4></a>
+                <figure>${(house.address)!} </figure>
+                <div class="tag price">￥${(house.price)!} 万</div>
             </div>
-        </a>
-        <div class="info">
-            <a href="/house/detail?id=${house.id}"><h4>${(house.name)!}</h4></a>
-            <figure>${(house.address)!} </figure>
-            <div class="tag price">￥${(house.price)!} 万</div>
-        </div>
-    </div><!-- /.property -->
-    </#list>
+        </div><!-- /.property -->
+        </#list>
+    </#if>
 </aside><!-- /#featured-properties -->
 </#macro>
 

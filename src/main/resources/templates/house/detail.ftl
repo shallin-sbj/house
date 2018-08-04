@@ -26,8 +26,8 @@
                 <div class="col-md-9 col-sm-9">
                     <section id="property-detail">
                         <header class="property-title">
-                            <h1>${house.name}</h1>
-                            <figure>${house.address}</figure>
+                            <h1>${(house.name)!}</h1>
+                            <figure>${(house.address)!}</figure>
 
                         <#if loginUser??>
                             <span class="actions">
@@ -42,9 +42,9 @@
                             <div class="owl-carousel property-carousel">
                                 <#list house.imageList as image> 
                                    <div class="property-slide">
-                                      <a href="${image}" class="image-popup">
+                                      <a href="${(image)!}" class="image-popup">
                                          <div class="overlay"><h3>Front View</h3></div>
-                                         <img alt="" src="${image}">
+                                         <img alt="" src="${(image)!}">
                                      </a>
                                    </div><!-- /.property-slide -->
                                 </#list>
@@ -56,41 +56,45 @@
                                     <header><h2>总体</h2></header>
                                     <dl>
                                         <dt>地址</dt>
-                                            <dd>${house.address}</dd>
+                                            <dd>${(house.address)!}</dd>
                                         <dt>价格</dt>
-                                            <dd><span class="tag price">${house.priceStr}</span></dd>
+                                            <dd><span class="tag price">${(house.priceStr)!}</span></dd>
                                         <dt>类型:</dt>
                                             <dd>销售</dd>
                                         <dt>面积:</dt>
-                                            <dd>${house.area} m<sup>2</sup></dd>
+                                            <dd>${(house.area)!} m<sup>2</sup></dd>
                                         <dt>卧室:</dt>
-                                            <dd>${house.beds}</dd>
+                                            <dd>${(house.beds)!}</dd>
                                         <dt>卫生间:</dt>
-                                            <dd>${house.baths}</dd>
+                                            <dd>${(house.baths)!}</dd>
                                         <dt>评分:</dt>
-                                            <dd><div class="rating rating-overall" data-score="${house.rating}"></div></dd>
+                                            <dd><div class="rating rating-overall" data-score="${(house.rating)!}"></div></dd>
                                     </dl>
                                 </section><!-- /#quick-summary -->
                             </div><!-- /.col-md-4 -->
                             <div class="col-md-8 col-sm-12">
                                 <section id="description">
                                     <header><h2>房屋描述</h2></header>
-                                    ${house.remarks}
+                                    ${(house.remarks)!}
                                 </section><!-- /#description -->
                                 <section id="property-features">
                                     <header><h2>房屋特点</h2></header>
                                     <ul class="list-unstyled property-features-list">
-                                    <#list house.featureList as feature> 
-                                        <li>${feature}</li>
-                                    </#list>
+                                        <#if house.featureList??>
+                                            <#list house.featureList as feature>
+                                                <li>${feature}</li>
+                                            </#list>
+                                        </#if>
                                     </ul>
                                 </section><!-- /#property-features -->
                                 <section id="floor-plans">
                                     <div class="floor-plans">
                                         <header><h2>户型图</h2></header>
-                                         <#list house.floorPlanList as floorPlan> 
-                                            <a href="${floorPlan}" class="image-popup"><img alt="" src="${floorPlan}"></a>
-                                         </#list>
+                                         <#if house.featureList??>
+                                             <#list house.floorPlanList as floorPlan>
+                                                 <a href="${floorPlan}" class="image-popup"><img alt="" src="${floorPlan}"></a>
+                                             </#list>
+                                         </#if>
                                     </div>
                                 </section><!-- /#floor-plans -->
                                <!--   <section id="property-map">
@@ -244,9 +248,10 @@
                         </aside><!-- /#edit-search -->
                         <aside id="featured-properties">
                             <header><h3>热门房产</h3></header>
-                            <#list recomHouses as house>
+                           <#-- <#if recomHouses??>-->
+                                <#list recomHouses as house>
                             <div class="property small">
-                                <a href="/house/detail?id=${house.id}">
+                                <a href="/house/detail?id=${(house.id)!}">
                                     <div class="property-image">
                                         <img alt="" src="${(house.firstImg)!}" style="width: 100px;height: 75px">
                                     </div>
@@ -257,7 +262,8 @@
                                     <div class="tag price">￥${(house.price)!}</div>
                                 </div>
                             </div><!-- /.property -->
-                            </#list>
+                                </#list>
+                        <#--    </#if>-->
                         </aside><!-- /#featured-properties -->
                        
                     </section><!-- /#sidebar -->

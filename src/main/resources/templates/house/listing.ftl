@@ -47,37 +47,37 @@
                       <#list ps.list as house> 
                        
                             <div class="property">
-                                <figure class="tag status">${house.typeStr}</figure>
+                                <figure class="tag status">${(house.typeStr)!}</figure>
                                 <div class="property-image">
                                     <figure class="ribbon">In Hold</figure>
-                                    <a href="/house/detail?id=${house.id}">
-                                        <img alt="" src="${house.firstImg}" style="width: 260px;height: 195px" >
+                                    <a href="/house/detail?id=${(house.id)!}">
+                                        <img alt="" src="${(house.firstImg)!}" style="width: 260px;height: 195px" >
                                     </a>
                                 </div>
 
                                 <div class="info">
                                     <header>
-                                        <a href="/house/detail?id=${house.id}"><h3>${house.name}</h3></a>
-                                        <figure>${house.address}</figure>
+                                        <a href="/house/detail?id=${(house.id)!}"><h3>${(house.name)!}</h3></a>
+                                        <figure>${(house.address)!}</figure>
 
                                     </header>
-                                    <div class="tag price">￥ ${house.price}万</div>
+                                    <div class="tag price">￥ ${(house.price)!}万</div>
                                     <aside>
-                                         <p>${house.remarks}
+                                         <p>${(house.remarks)!}
                                         </p>
 
                                         <dl>
                                             <dt>Status:</dt>
                                                 <dd>Sale</dd>
                                             <dt>Area:</dt>
-                                                <dd>${house.area} m<sup>2</sup></dd>
+                                                <dd>${(house.area)!} m<sup>2</sup></dd>
                                             <dt>Beds:</dt>
-                                                <dd>${house.beds}</dd>
+                                                <dd>${(house.beds)!}</dd>
                                             <dt>Baths:</dt>
-                                                <dd>${house.baths}</dd>
+                                                <dd>${(house.baths)!}</dd>
                                         </dl>
                                     </aside>
-                                    <a href="/house/detail?id=${house.id}" class="link-arrow">Read More</a>
+                                    <a href="/house/detail?id=${(house.id)!}" class="link-arrow">Read More</a>
                                 </div>
                             </div>
                         </#list>
@@ -117,21 +117,22 @@
                         </aside><!-- /#edit-search -->
                         <aside id="featured-properties">
                             <header><h3>热门房产</h3></header>
-                            <#list recomHouses as house>
+                            <#if recomHouses??>
+                                <#list recomHouses as house>
                             <div class="property small">
-                                <a href="/house/detail?id=${house.id}">
+                                <a href="/house/detail?id=${(house.id)!}">
                                     <div class="property-image">
                                         <img alt="" src="${(house.firstImg)!}" style="width: 100px;height: 75px">
                                     </div>
                                 </a>
                                 <div class="info">
-                                    <a href="/house/detail?id=${house.id}"><h4>${(house.name)!}</h4></a>
+                                    <a href="/house/detail?id=${(house.id)!}"><h4>${(house.name)!}</h4></a>
                                     <figure>${(house.address)!} </figure>
                                     <div class="tag price">￥${(house.price)!} 万</div>
                                 </div>
                             </div><!-- /.property -->
-                            </#list>
-                            
+                                </#list>
+                            </#if>
                         </aside><!-- /#featured-properties -->
                         
                     </section><!-- /#sidebar -->

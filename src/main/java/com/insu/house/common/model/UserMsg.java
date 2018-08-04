@@ -1,4 +1,4 @@
-package com.insu.house.common.result;
+package com.insu.house.common.model;
 
 import java.util.Date;
 

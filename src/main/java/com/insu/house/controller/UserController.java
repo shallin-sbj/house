@@ -1,9 +1,11 @@
 package com.insu.house.controller;
 
+import com.insu.house.aop.SystemControllerAnnotation;
 import com.insu.house.common.constants.CommonConstants;
 import com.insu.house.common.model.User;
 import com.insu.house.common.result.ResultMsg;
 import com.insu.house.common.utils.HashUtils;
+import com.insu.house.common.utils.PasswordUtils;
 import com.insu.house.common.utils.UserHelper;
 import com.insu.house.service.UserService;
 import org.apache.commons.lang3.StringUtils;
@@ -12,7 +14,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -23,6 +24,10 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    private PasswordUtils passwordUtils = new PasswordUtils();
+
+    @SystemControllerAnnotation(description = "获取用户列表")
     @RequestMapping("/userlist")
     public List<User> getUsers() {
         return userService.getUsers();
@@ -36,6 +41,7 @@ public class UserController {
      * @param modelMap
      * @return
      */
+    @SystemControllerAnnotation(description = "用户注册")
     @RequestMapping("accounts/register")
     public String accountRegister(User user, ModelMap modelMap) {
         if (user == null || user.getName() == null) {
@@ -51,6 +57,7 @@ public class UserController {
         }
     }
 
+    @SystemControllerAnnotation(description = "用户激活")
     @RequestMapping("accounts/verify")
     public String verify(String key) {
         boolean result = userService.enable(key);
@@ -65,6 +72,7 @@ public class UserController {
     /**
      * 登录接口
      */
+    @SystemControllerAnnotation(description = "登录")
     @RequestMapping("/accounts/signin")
     public String signin(HttpServletRequest req) {
         String username = req.getParameter("username");
@@ -92,6 +100,7 @@ public class UserController {
      * @param request
      * @return
      */
+    @SystemControllerAnnotation(description = "退出")
     @RequestMapping("accounts/logout")
     public String logout(HttpServletRequest request) {
         HttpSession session = request.getSession(true);
@@ -107,6 +116,7 @@ public class UserController {
      * @param model
      * @return
      */
+    @SystemControllerAnnotation(description = "个人信息页")
     @RequestMapping("accounts/profile")
     public String profile(HttpServletRequest req, User updateUser, ModelMap model) {
         if (updateUser.getEmail() == null) {
@@ -130,6 +140,7 @@ public class UserController {
      * @param mode
      * @return
      */
+    @SystemControllerAnnotation(description = "修改密码")
     @RequestMapping("accounts/changePassword")
     public String changePassword(String email, String password, String newPassword,
                                  String confirmPassword, ModelMap mode) {
@@ -138,7 +149,7 @@ public class UserController {
             return "redirct:/accounts/profile?" + ResultMsg.errorMsg("密码错误").asUrlParams();
         }
         User updateUser = new User();
-        updateUser.setPasswd(HashUtils.encryPassword(newPassword));
+        updateUser.setPasswd(passwordUtils.encryptedPassword(newPassword));
         userService.updateUser(updateUser, email);
         return "redirect:/accounts/profile?" + ResultMsg.successMsg("更新成功").asUrlParams();
     }
@@ -150,6 +161,7 @@ public class UserController {
      * @param modelMap
      * @return
      */
+    @SystemControllerAnnotation(description = "忘记密码")
     @RequestMapping("accounts/remember")
     public String remember(String username, ModelMap modelMap) {
         if (StringUtils.isBlank(username)) {
@@ -160,6 +172,7 @@ public class UserController {
         return "/user/accounts/remember";
     }
 
+    @SystemControllerAnnotation(description = "过期的激活")
     @RequestMapping("accounts/reset")
     public String reset(String key,ModelMap modelMap){
         String email = userService.getResetEmail(key);
@@ -171,6 +184,13 @@ public class UserController {
         return "/user/accounts/reset";
     }
 
+    /**
+     *
+     * @param req
+     * @param user
+     * @return
+     */
+    @SystemControllerAnnotation(description = "重置密码")
     @RequestMapping(value="accounts/resetSubmit")
     public String resetSubmit(HttpServletRequest req,User user){
         ResultMsg retMsg = UserHelper.validateResetPassword(user.getKey(), user.getPasswd(), user.getConfirmPasswd());

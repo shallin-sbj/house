@@ -16,10 +16,23 @@
 
     <typeAliases>
         <typeAlias type="com.insu.house.common.model.User" alias="user" />
+        <typeAlias type="com.insu.house.common.model.House" alias="house" />
+        <typeAlias type="com.insu.house.common.model.Community" alias="community" />
+        <typeAlias type="com.insu.house.common.model.Agency" alias="agency"/>
+        <typeAlias type="com.insu.house.common.model.City" alias="city" />
+        <typeAlias type="com.insu.house.common.model.Comment" alias="comment"/>
+        <typeAlias type="com.insu.house.common.model.HouseUser" alias="houseUser" />
+        <typeAlias type="com.insu.house.common.model.Blog" alias="blog"/>
+        <typeAlias type="com.insu.house.common.model.UserMsg" alias="userMsg"/>
+        <typeAlias type="com.insu.house.common.model.HouseUser" alias="houseUser"/>
     </typeAliases>
 
     <mappers>
         <mapper resource="mapper/user.xml" />
+        <mapper resource="mapper/house.xml" />
+        <mapper resource="mapper/blog.xml"/>
+        <mapper resource="mapper/comment.xml"/>
+        <mapper resource="mapper/agency.xml" />
     </mappers>
 
 </configuration>
