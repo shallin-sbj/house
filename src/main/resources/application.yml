@@ -39,7 +39,7 @@ spring:
         mail:
            auth: true
   redis:
-    host: 120.79.130.20
+    host: 127.0.0.1
     port: 6379
 
 
